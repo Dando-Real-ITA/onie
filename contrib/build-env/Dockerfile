@@ -7,10 +7,8 @@
 FROM debian:10
 
 # Configure Debian archive repositories for end-of-life release
-RUN cat > /etc/apt/sources.list << EOF
-deb http://archive.debian.org/debian/ buster main contrib non-free
-deb http://archive.debian.org/debian-security/ buster/updates main contrib non-free
-EOF
+RUN echo "deb http://archive.debian.org/debian/ buster main contrib non-free" > /etc/apt/sources.list && \
+    echo "deb http://archive.debian.org/debian-security/ buster/updates main contrib non-free" >> /etc/apt/sources.list
 
 # Configure apt to handle old timestamps and unsigned packages
 RUN echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99archive && \
