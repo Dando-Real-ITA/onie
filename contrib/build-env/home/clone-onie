@@ -4,8 +4,9 @@
 #
 #  SPDX-License-Identifier:     GPL-2.0
 
-ONIE_REPO="https://github.com/opencomputeproject/onie.git"
+ONIE_REPO="https://github.com/Dando-Real-ITA/onie.git"
 DEST_DIR="/home/build/src/onie"
 
 mkdir -p $(dirname $DEST_DIR)
-git clone "$ONIE_REPO" "$DEST_DIR"
+BRANCH="master"
+git clone --depth 1 "$ONIE_REPO" -b "$BRANCH" --recurse-submodules --shallow-submodules "$DEST_DIR"
