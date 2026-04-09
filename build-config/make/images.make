@@ -484,6 +484,7 @@ $(RECOVERY_ISO_STAMP): $(GRUB_INSTALL_STAMP) $(GRUB_HOST_INSTALL_STAMP) $(RECOVE
 	     CONSOLE_DEV=$(CONSOLE_DEV) \
 	     CONSOLE_PORT=$(CONSOLE_PORT) \
 	     GRUB_DEFAULT_ENTRY=$(GRUB_DEFAULT_ENTRY) \
+	     GRUB_DEBUG=$(GRUB_DEBUG) \
 	     UEFI_ENABLE=$(UEFI_ENABLE) \
 	     EXTRA_CMDLINE_LINUX="$(EXTRA_CMDLINE_LINUX)" \
 	     SERIAL_CONSOLE_ENABLE=$(SERIAL_CONSOLE_ENABLE) \
@@ -503,10 +504,13 @@ $(RECOVERY_ISO_STAMP): $(GRUB_INSTALL_STAMP) $(GRUB_HOST_INSTALL_STAMP) $(RECOVE
 pxe-efi64: $(PXE_EFI64_STAMP)
 $(PXE_EFI64_STAMP): $(RECOVERY_ISO_STAMP) $(RECOVERY_CONF_DIR)/grub-embed.cfg
 	$(Q) echo "==== Create $(MACHINE_PREFIX) ONIE PXE EFI64 Recovery Image ===="
+	$(Q) mkdir -p $(RECOVERY_DIR)
 	$(Q) cd $(GRUB_TARGET_LIB_UEFI_DIR) && \
 		ls *.mod|sed -e 's/\.mod//g'|egrep -v '(ehci|at_keyboard)' > $(PXE_EFI64_GRUB_MODS)
+	$(Q) sed -e "s/<GRUB_DEBUG>/$(GRUB_DEBUG)/g" \
+		$(RECOVERY_CONF_DIR)/grub-embed.cfg > $(RECOVERY_DIR)/grub-embed-debug.cfg
 	$(Q) $(GRUB_HOST_INSTALL_UEFI_DIR)/usr/bin/grub-mkimage --format=$(ARCH)-efi	\
-	    --config=$(RECOVERY_CONF_DIR)/grub-embed.cfg			\
+	    --config=$(RECOVERY_DIR)/grub-embed-debug.cfg			\
 	    --directory=$(GRUB_TARGET_LIB_UEFI_DIR)	\
 	    --output=$(PXE_EFI64_IMAGE) --memdisk=$(RECOVERY_ISO_IMAGE)		\
 	    $$(cat $(PXE_EFI64_GRUB_MODS))
