@@ -25,6 +25,9 @@ I2CTOOLS_SYSEEPROM = no
 # This platform requires the PXE_EFI64 installer
 PXE_EFI64_ENABLE = yes
 
+# Enable UEFI for Debian 10 support
+UEFI_ENABLE = yes
+
 CONSOLE_SPEED = 115200
 CONSOLE_DEV = 0
 CONSOLE_FLAG = 0
@@ -32,11 +35,11 @@ CONSOLE_FLAG = 0
 EXTRA_CMDLINE_LINUX = i2c-ismt.bus_speed=100
 
 # Set Linux kernel version
-LINUX_VERSION		= 3.2
-LINUX_MINOR_VERSION	= 69
+LINUX_VERSION		= 5.4
+LINUX_MINOR_VERSION	= 86
 
-# Older GCC required for older 3.2 kernel
-GCC_VERSION = 4.9.2
+# GCC version compatible with Debian 10
+GCC_VERSION = 8.3.0
 
 #-------------------------------------------------------------------------------
 #
