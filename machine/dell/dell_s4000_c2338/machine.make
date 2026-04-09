@@ -25,9 +25,6 @@ I2CTOOLS_SYSEEPROM = no
 # This platform requires the PXE_EFI64 installer
 PXE_EFI64_ENABLE = yes
 
-# Enable UEFI for Debian 10 support
-UEFI_ENABLE = yes
-
 CONSOLE_SPEED = 115200
 CONSOLE_DEV = 0
 CONSOLE_FLAG = 0
