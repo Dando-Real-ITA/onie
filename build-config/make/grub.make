@@ -88,6 +88,9 @@ endif
 
 GRUB_TIMEOUT	?= 5
 
+# Enable GRUB debug mode: make GRUB_DEBUG=yes
+GRUB_DEBUG	?= no
+
 # GRUB configuration options common to i386-pc and $(ARCH)-efi
 GRUB_COMMON_CONFIG = 			\
 		--prefix=/usr		\
@@ -96,6 +99,10 @@ GRUB_COMMON_CONFIG = 			\
 		--disable-efiemu	\
 		--disable-grub-mkfont	\
 		--disable-grub-themes
+
+ifeq ($(GRUB_DEBUG),yes)
+  GRUB_COMMON_CONFIG += --enable-grub-emu --enable-grub-emu-usb
+endif
 
 PHONY += grub grub-download grub-source grub-patch \
 	 grub-configure grub-build grub-install \

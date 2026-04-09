@@ -38,6 +38,9 @@ LINUX_MINOR_VERSION	= 86
 # GCC version compatible with Debian 10
 GCC_VERSION = 8.3.0
 
+# Enable GRUB debug mode for troubleshooting: make GRUB_DEBUG=yes
+GRUB_DEBUG ?= no
+
 #-------------------------------------------------------------------------------
 #
 # Local Variables:
