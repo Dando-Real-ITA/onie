@@ -32,11 +32,14 @@ CONSOLE_FLAG = 0
 EXTRA_CMDLINE_LINUX = i2c-ismt.bus_speed=100
 
 # Set Linux kernel version
-LINUX_VERSION		= 3.2
-LINUX_MINOR_VERSION	= 69
+LINUX_VERSION		= 5.4
+LINUX_MINOR_VERSION	= 86
 
-# Older GCC required for older 3.2 kernel
-GCC_VERSION = 4.9.2
+# GCC version compatible with Debian 10
+GCC_VERSION = 8.3.0
+
+# Enable GRUB debug mode for troubleshooting: make GRUB_DEBUG=yes
+GRUB_DEBUG ?= no
 
 #-------------------------------------------------------------------------------
 #
